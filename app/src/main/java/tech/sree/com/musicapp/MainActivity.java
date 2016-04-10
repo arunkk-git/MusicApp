@@ -36,37 +36,26 @@ Button playList;
     }
 
     public void playListMusic(View V){
-      //  return ;
 
         String[] proj = {"*"};
         Uri tempPlaylistURI = MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
 
-        // In the next line 'this' points to current Activity.
-        // If you want to use the same code in other java file then activity,
-        // then use an instance of any activity in place of 'this'.
-        Cursor playListCursor= MainActivity.this.managedQuery(tempPlaylistURI, proj, null, null, null);
-        //Cursor playListCursor= getContentResolver().query(tempPlaylistURI, proj, null, null, null);
-        //playListCursor = managedQuery(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,proj, null, null,MediaStore.Audio.Media.TITLE);
+        Cursor playListCursor= getContentResolver().query(tempPlaylistURI, proj, null, null, null);
+
         if(playListCursor == null){
-           // System.out.println("Not having any Playlist on phone --------------");
-            Toast.makeText(getApplicationContext(),"Not having any Playlist on phone ----------",Toast.LENGTH_LONG).show();
-            return;//don't have list on phone
+           Toast.makeText(getApplicationContext(),"Not having any Playlist on phone ----------",Toast.LENGTH_LONG).show();
+            return;
         }
-
         System.gc();
-
         String playListName = null;
-
-      //  System.out.println(">>>>>>>  CREATING AND DISPLAYING LIST OF ALL CREATED PLAYLIST  <<<<<<");
         Toast.makeText(getApplicationContext(),">>>>>>>  CREATING AND DISPLAYING LIST OF ALL CREATED PLAYLIST  <<<<<<",Toast.LENGTH_LONG).show();
 
         for(int i = 0; i <playListCursor.getCount() ; i++)
         {
             playListCursor.moveToPosition(i);
             playListName = playListCursor.getString(playListCursor.getColumnIndex("name"));
-            //System.out.println("> " + i + "  : " + playListName );
             Toast.makeText(getApplicationContext(),
-                    "> " + i + "  : " + playListName,Toast.LENGTH_LONG).show();
+                    "> " + i+1 + "  : " + playListName,Toast.LENGTH_LONG).show();
         }
 
         if(playListCursor != null)
@@ -76,7 +65,7 @@ Button playList;
 
 
     public void playMusic(View V){
-        Toast.makeText(getApplicationContext(),"Play Music on 53",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Play Music ",Toast.LENGTH_LONG).show();
         int hour = 0;
         int minute = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -99,7 +88,5 @@ Button playList;
         pi = PendingIntent.getActivity(this, 2, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         am = (AlarmManager) getSystemService(ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP,futureDate.getTimeInMillis(), pi);
-
     }
-
 }
