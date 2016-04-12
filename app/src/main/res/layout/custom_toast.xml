@@ -8,14 +8,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/icon"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/music"
+        />
     <TextView
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="#00FF00"
+        android:textColor="#FF0F00"
         android:id="@+id/toastText"
         android:gravity="center_horizontal"
         android:text="message"
